@@ -59,19 +59,20 @@ export default async function decorate(block) {
     const cells = [...row.children];
     cells.forEach((cell) => {
       const link = cell.querySelector('a');
+      if (!link) return;
+
+      const areaLink = document.createElement('a');
+      areaLink.href = link.href;
+      areaLink.setAttribute('aria-label', `explore ${link.textContent.trim()}`);
+
       const icon = cell.querySelector('.icon');
-      if (link && icon) {
-        const areaLink = document.createElement('a');
-        areaLink.href = link.href;
-        areaLink.setAttribute('aria-label', `explore ${link.textContent.trim()}`);
+      if (icon) areaLink.append(icon.cloneNode(true));
 
-        const iconClone = icon.cloneNode(true);
-        const textSpan = document.createElement('span');
-        textSpan.textContent = link.textContent.trim();
+      const textSpan = document.createElement('span');
+      textSpan.textContent = link.textContent.trim();
+      areaLink.append(textSpan);
 
-        areaLink.append(iconClone, textSpan);
-        gridContainer.append(areaLink);
-      }
+      gridContainer.append(areaLink);
     });
     row.remove();
   }

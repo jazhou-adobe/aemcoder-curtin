@@ -14,7 +14,8 @@ export default async function decorate(block) {
     const hasLink = firstCell.querySelector('a');
     const text = firstCell.textContent.trim();
 
-    if (!hasImage && !hasLink && cells.length === 1 && text.length < 20) {
+    const nonEmptyCells = cells.filter((c) => c.textContent.trim() || c.querySelector('img, a'));
+    if (!hasImage && !hasLink && nonEmptyCells.length === 1 && text.length < 20) {
       // This is a tab label
       currentTab = { label: text, cards: [], cta: null };
       tabs.push(currentTab);

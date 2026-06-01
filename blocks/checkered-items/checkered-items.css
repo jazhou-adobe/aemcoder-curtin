@@ -13,8 +13,6 @@
 }
 
 .checkered-items-wrapper {
-  max-width: 100% !important;
-  padding: 0 !important;
   border-top: 4px solid #000;
 }
 
