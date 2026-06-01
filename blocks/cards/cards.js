@@ -1,17 +1,32 @@
-import { createOptimizedPicture } from '../../scripts/aem.js';
+export default async function decorate(block) {
+  const rows = [...block.children];
+  const container = document.createElement('div');
 
-export default function decorate(block) {
-  /* change to ul, li */
-  const ul = document.createElement('ul');
-  [...block.children].forEach((row) => {
-    const li = document.createElement('li');
-    while (row.firstElementChild) li.append(row.firstElementChild);
-    [...li.children].forEach((div) => {
-      if (div.children.length === 1 && div.querySelector('picture')) div.className = 'cards-card-image';
-      else div.className = 'cards-card-body';
-    });
-    ul.append(li);
+  rows.forEach((row) => {
+    const cells = [...row.children];
+    const card = document.createElement('div');
+
+    // First cell is image
+    const imgCell = cells[0];
+    if (imgCell) {
+      const picture = imgCell.querySelector('picture');
+      if (picture) {
+        card.appendChild(picture);
+      }
+    }
+
+    // Second cell is caption text
+    const textCell = cells[1];
+    if (textCell) {
+      const caption = document.createElement('div');
+      caption.className = 'cards-caption';
+      caption.innerHTML = textCell.innerHTML;
+      card.appendChild(caption);
+    }
+
+    container.appendChild(card);
   });
-  ul.querySelectorAll('picture > img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
-  block.replaceChildren(ul);
+
+  block.textContent = '';
+  block.appendChild(container);
 }

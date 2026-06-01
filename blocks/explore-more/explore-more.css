@@ -1,0 +1,125 @@
+/* Explore More Block */
+.explore-more {
+  --block-bg: #f7f7f7;
+  --block-text: #4b4b4b;
+  --block-heading-color: #000;
+  --block-card-bg: #fff;
+  --block-card-border: 2px solid #000;
+  --block-card-radius: 8px;
+  --block-card-padding: 24px;
+  --block-gap: 24px;
+  --block-icon-color: #5525e5;
+  --block-icon-size: 40px;
+}
+
+.explore-more-wrapper {
+  max-width: 1128px;
+}
+
+main > .explore-more-container {
+  background: #f7f7f7;
+  margin: 0;
+  padding: 100px 0;
+}
+
+main > .explore-more-container > div {
+  max-width: 1128px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+main > .explore-more-container > div > h2 {
+  text-align: center;
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--block-heading-color);
+  margin: 0 0 8px;
+}
+
+main > .explore-more-container > div > p {
+  text-align: center;
+  font-size: 18px;
+  color: var(--block-text);
+  margin: 0 0 40px;
+}
+
+.explore-more > div {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--block-gap);
+}
+
+@media (width >= 600px) {
+  .explore-more > div {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 900px) {
+  .explore-more > div {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.explore-more .card {
+  background: var(--block-card-bg);
+  border: var(--block-card-border);
+  border-radius: var(--block-card-radius);
+  padding: var(--block-card-padding);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-decoration: none;
+  color: var(--block-text);
+  transition: box-shadow 0.2s ease;
+  min-height: 174px;
+}
+
+.explore-more .card:hover {
+  box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
+}
+
+.explore-more .card .card-icon {
+  width: var(--block-icon-size);
+  height: var(--block-icon-size);
+  display: block;
+  background-color: var(--block-icon-color);
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  flex-shrink: 0;
+}
+
+.explore-more .card h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--block-heading-color);
+  margin: 0;
+}
+
+.explore-more .card p {
+  font-size: 14px;
+  color: var(--block-text);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Reset any button styling on links within this block */
+main .explore-more a.button:any-link {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  white-space: normal;
+}
+
+main .explore-more .button-container {
+  display: inline;
+}

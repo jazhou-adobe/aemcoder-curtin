@@ -1,0 +1,11 @@
+.footer-acknowledgement {
+  padding: 20px 0;
+  border-top: 1px solid #333;
+}
+
+.footer-acknowledgement p {
+  color: #999;
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 0;
+}

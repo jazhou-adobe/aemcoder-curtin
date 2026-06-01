@@ -1,0 +1,174 @@
+/* Course Tabs Block */
+.course-tabs-wrapper {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+main > .section:has(.course-tabs-wrapper) {
+  margin: 0;
+}
+
+.course-tabs {
+  --tab-bg: #f7f7f7;
+  --tab-active-color: rgb(85, 37, 229);
+  --tab-text-color: #1a1a1a;
+  --content-max-width: 1128px;
+  --content-text-color: #4b4b4b;
+  --section-padding: 60px 0;
+}
+
+/* Tab Navigation */
+.course-tabs > div:first-child {
+  display: flex;
+  justify-content: center;
+  background: var(--tab-bg);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: none;
+}
+
+.course-tabs > div:first-child > div {
+  padding: 16px 40px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--tab-text-color);
+  cursor: pointer;
+  border-bottom: 4px solid transparent;
+  transition: border-color 0.2s;
+  text-align: center;
+  user-select: none;
+}
+
+.course-tabs > div:first-child > div:hover {
+  border-bottom-color: #ccc;
+}
+
+.course-tabs > div:first-child > div.active {
+  border-bottom-color: var(--tab-active-color);
+}
+
+/* Tab Panels */
+.course-tabs > div:not(:first-child) {
+  display: none;
+}
+
+.course-tabs > div:not(:first-child).active {
+  display: block;
+}
+
+/* Panel content area */
+.course-tabs > div:not(:first-child) > div:first-child {
+  display: none; /* Hide the tab ID cell */
+}
+
+.course-tabs > div:not(:first-child) > div:last-child {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 60px 24px 80px;
+}
+
+/* Typography within panels */
+.course-tabs h2 {
+  font-family: var(--heading-font-family, "effra", sans-serif);
+  font-size: 48px;
+  font-weight: 700;
+  color: #000;
+  margin-top: 80px;
+  margin-bottom: 40px;
+  line-height: 1.15;
+}
+
+.course-tabs > div:not(:first-child) > div:last-child > h2:first-child {
+  margin-top: 0;
+}
+
+.course-tabs h3 {
+  font-family: var(--heading-font-family, "effra", sans-serif);
+  font-size: 34px;
+  font-weight: 700;
+  color: #000;
+  margin-top: 40px;
+  margin-bottom: 16px;
+}
+
+.course-tabs p {
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--content-text-color);
+  margin-bottom: 32px;
+}
+
+.course-tabs ul {
+  padding-left: 20px;
+  margin-bottom: 32px;
+}
+
+.course-tabs ul li {
+  font-size: 18px;
+  line-height: 32px;
+  color: var(--content-text-color);
+}
+
+/* Links */
+.course-tabs a {
+  color: var(--link-color, #717171);
+  text-decoration: underline;
+}
+
+.course-tabs a:hover {
+  color: var(--link-hover-color, #000);
+}
+
+/* Why study section cards styling */
+.course-tabs .why-study-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+  text-align: center;
+  background: #f0f0f0;
+  padding: 100px 60px;
+  margin: 80px -24px 60px;
+  border-radius: 0;
+}
+
+.course-tabs .why-study-cards .card-item h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 12px;
+  margin-bottom: 8px;
+}
+
+.course-tabs .why-study-cards .card-item p {
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 0;
+}
+
+/* Responsive */
+@media (width < 900px) {
+  .course-tabs > div:first-child {
+    flex-wrap: wrap;
+  }
+
+  .course-tabs > div:first-child > div {
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+
+  .course-tabs h2 {
+    font-size: 32px;
+    margin-top: 48px;
+    margin-bottom: 24px;
+  }
+
+  .course-tabs h3 {
+    font-size: 24px;
+  }
+
+  .course-tabs .why-study-cards {
+    grid-template-columns: 1fr;
+    margin: 40px -24px;
+    padding: 40px 24px;
+  }
+}
