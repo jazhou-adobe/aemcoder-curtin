@@ -1,137 +1,157 @@
-async function decorateNestedBlocks(panel) {
-  const { loadBlock } = await import('../../scripts/aem.js');
-  const nestedBlocks = [...panel.querySelectorAll('[class]:not([data-block-status])')].filter((el) => {
-    const classes = [...el.classList];
-    return classes.some((c) => c !== 'icon' && !c.startsWith('icon-'));
-  });
-  for (const nested of nestedBlocks) {
-    nested.dataset.blockName = nested.className.split(' ')[0];
-    nested.dataset.blockStatus = 'initialized';
-    try {
-      await loadBlock(nested);
-    } catch (e) {
-      // ignore if block not found
-    }
-  }
-}
-
 export default async function decorate(block) {
   const rows = [...block.children];
-  if (rows.length < 2) return;
 
-  // First row = tab navigation labels
-  const tabNav = rows[0];
-  const tabButtons = [...tabNav.children];
+  // First N rows are tab labels, remaining rows are tab content panels
+  const tabLabels = [];
+  const tabPanels = [];
 
-  // Remaining rows = tab panels (each has: [id-cell, content-cell])
-  const tabPanels = rows.slice(1);
-
-  // Activate first tab by default
-  if (tabButtons.length > 0) {
-    tabButtons[0].classList.add('active');
-  }
-  if (tabPanels.length > 0) {
-    tabPanels[0].classList.add('active');
-  }
-
-  // Add click handlers
-  tabButtons.forEach((btn, index) => {
-    btn.setAttribute('role', 'tab');
-    btn.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
-    btn.setAttribute('tabindex', index === 0 ? '0' : '-1');
-
-    btn.addEventListener('click', () => {
-      // Deactivate all
-      tabButtons.forEach((b) => {
-        b.classList.remove('active');
-        b.setAttribute('aria-selected', 'false');
-        b.setAttribute('tabindex', '-1');
-      });
-      tabPanels.forEach((p) => p.classList.remove('active'));
-
-      // Activate clicked
-      btn.classList.add('active');
-      btn.setAttribute('aria-selected', 'true');
-      btn.setAttribute('tabindex', '0');
-      if (tabPanels[index]) {
-        tabPanels[index].classList.add('active');
-      }
-    });
+  rows.forEach((row) => {
+    const cells = [...row.children];
+    const text = row.textContent.trim();
+    // Tab labels: single cell, short text, no block-level children
+    const hasBlockContent = row.querySelector('h1,h2,h3,h4,h5,h6,ul,ol');
+    const hasMultipleP = row.querySelectorAll('p').length > 1;
+    if (cells.length === 1 && text.length < 60 && !hasBlockContent && !hasMultipleP) {
+      tabLabels.push({ label: text, row });
+    } else {
+      tabPanels.push({ row });
+    }
   });
 
-  // Set role attributes on panels
-  tabPanels.forEach((panel) => {
-    panel.setAttribute('role', 'tabpanel');
-  });
+  // Build tab UI
+  const tabContainer = document.createElement('div');
+  tabContainer.className = 'course-tabs__container';
 
-  // Decorate any nested blocks (e.g. article-cards inside tab content)
-  for (const panel of tabPanels) {
-    await decorateNestedBlocks(panel);
-  }
-
-  // Add ARIA role to tab nav
+  // Tab navigation
+  const tabNav = document.createElement('div');
+  tabNav.className = 'course-tabs__nav';
   tabNav.setAttribute('role', 'tablist');
 
-  // Enhance the "Why study at Curtin?" section with card layout
-  tabPanels.forEach((panel) => {
-    const contentCell = panel.querySelector('div:last-child');
-    if (!contentCell) return;
+  tabLabels.forEach((tab, i) => {
+    const button = document.createElement('button');
+    button.className = 'course-tabs__tab';
+    button.setAttribute('role', 'tab');
+    button.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+    button.setAttribute('aria-controls', `course-tab-panel-${i}`);
+    button.id = `course-tab-${i}`;
+    button.textContent = tab.label;
+    if (i === 0) button.classList.add('active');
+    tabNav.appendChild(button);
+    tab.row.remove();
+  });
 
-    // Find the "Why study at Curtin?" heading and create card grid
-    const headings = [...contentCell.querySelectorAll('h2')];
-    const whyHeading = headings.find((h) => h.textContent.includes('Why study at Curtin'));
-    if (!whyHeading) return;
+  // Tab panels
+  const panelsContainer = document.createElement('div');
+  panelsContainer.className = 'course-tabs__panels';
 
-    // Collect the cards (h3 + p pairs after "Why study at Curtin?")
-    const cards = [];
-    let el = whyHeading.nextElementSibling;
-    while (el && el.tagName !== 'H2') {
-      if (el.tagName === 'H3') {
-        const cardTitle = el.textContent.trim();
-        const nextEl = el.nextElementSibling;
-        const cardDesc = (nextEl && nextEl.tagName === 'P') ? nextEl.textContent.trim() : '';
-        cards.push({ title: cardTitle, desc: cardDesc });
+  tabPanels.forEach((panel, i) => {
+    const panelDiv = document.createElement('div');
+    panelDiv.className = 'course-tabs__panel';
+    panelDiv.setAttribute('role', 'tabpanel');
+    panelDiv.setAttribute('aria-labelledby', `course-tab-${i}`);
+    panelDiv.id = `course-tab-panel-${i}`;
+    if (i !== 0) panelDiv.hidden = true;
+
+    // Move content from original row into the panel
+    const cells = [...panel.row.children];
+    const contentFragment = document.createDocumentFragment();
+    cells.forEach((cell) => {
+      contentFragment.append(...cell.childNodes);
+    });
+
+    // Split content by H2 headings into sections with alternating backgrounds
+    const tempDiv = document.createElement('div');
+    tempDiv.append(contentFragment);
+    const children = [...tempDiv.childNodes];
+
+    const sections = [];
+    let currentSection = [];
+
+    children.forEach((node) => {
+      if (node.nodeType === 1 && node.tagName === 'H2' && currentSection.length > 0) {
+        sections.push(currentSection);
+        currentSection = [];
       }
-      el = el.nextElementSibling;
-    }
+      currentSection.push(node);
+    });
+    if (currentSection.length > 0) sections.push(currentSection);
 
-    if (cards.length === 0) return;
+    sections.forEach((sectionNodes, si) => {
+      const sectionDiv = document.createElement('div');
+      sectionDiv.className = 'course-tabs__section';
+      if (si % 2 === 1) sectionDiv.classList.add('course-tabs__section--alt');
 
-    // Build the card grid
-    const cardsContainer = document.createElement('div');
-    cardsContainer.className = 'why-study-cards';
-    cards.forEach((card) => {
-      const cardEl = document.createElement('div');
-      cardEl.className = 'card-item';
-      cardEl.innerHTML = `<h3>${card.title}</h3><p>${card.desc}</p>`;
-      cardsContainer.appendChild(cardEl);
+      const inner = document.createElement('div');
+      inner.className = 'course-tabs__section-inner';
+      sectionNodes.forEach((n) => inner.appendChild(n));
+
+      // Detect "Why study" section: has h2 + multiple h3+p pairs, no lists
+      const h2 = inner.querySelector('h2');
+      const h3s = inner.querySelectorAll('h3');
+      const lists = inner.querySelectorAll('ul, ol');
+      if (h2 && h3s.length >= 3 && lists.length === 0) {
+        sectionDiv.classList.add('course-tabs__section--value-props');
+        // Create grid from h3+p pairs
+        const grid = document.createElement('div');
+        grid.className = 'course-tabs__value-props-grid';
+        h3s.forEach((h3El) => {
+          const prop = document.createElement('div');
+          prop.className = 'course-tabs__value-prop';
+          const nextP = h3El.nextElementSibling;
+          prop.appendChild(h3El);
+          if (nextP && nextP.tagName === 'P') prop.appendChild(nextP);
+          grid.appendChild(prop);
+        });
+        inner.appendChild(grid);
+      }
+
+      sectionDiv.appendChild(inner);
+      panelDiv.appendChild(sectionDiv);
     });
 
-    // Remove original elements and insert card grid
-    const elementsToRemove = [];
-    let current = whyHeading;
-    while (current && current.tagName !== 'H2') {
-      elementsToRemove.push(current);
-      current = current.nextElementSibling;
-    }
-    // Also handle case where next heading follows
-    if (current && current !== whyHeading) {
-      // Don't remove the next H2
-    }
+    panel.row.remove();
+    panelsContainer.appendChild(panelDiv);
+  });
 
-    // Insert cards after removing originals
-    const insertPoint = whyHeading;
-    elementsToRemove.forEach((removeEl) => {
-      if (removeEl !== whyHeading) removeEl.remove();
+  tabContainer.appendChild(tabNav);
+  tabContainer.appendChild(panelsContainer);
+  block.textContent = '';
+  block.appendChild(tabContainer);
+
+  // Tab switching
+  tabNav.addEventListener('click', (e) => {
+    const clickedTab = e.target.closest('[role="tab"]');
+    if (!clickedTab) return;
+
+    const tabs = tabNav.querySelectorAll('[role="tab"]');
+    const panels = panelsContainer.querySelectorAll('[role="tabpanel"]');
+
+    tabs.forEach((t) => {
+      t.setAttribute('aria-selected', 'false');
+      t.classList.remove('active');
     });
-    whyHeading.after(cardsContainer);
+    panels.forEach((p) => { p.hidden = true; });
 
-    // Remove the individual h3/p that are now in cards
-    let removeEl = cardsContainer.nextElementSibling;
-    while (removeEl && removeEl.tagName !== 'H2') {
-      const next = removeEl.nextElementSibling;
-      removeEl.remove();
-      removeEl = next;
+    clickedTab.setAttribute('aria-selected', 'true');
+    clickedTab.classList.add('active');
+    const index = [...tabs].indexOf(clickedTab);
+    panels[index].hidden = false;
+  });
+
+  // Keyboard navigation
+  tabNav.addEventListener('keydown', (e) => {
+    const tabs = [...tabNav.querySelectorAll('[role="tab"]')];
+    const current = tabs.indexOf(document.activeElement);
+    if (current < 0) return;
+
+    let next = -1;
+    if (e.key === 'ArrowRight') next = (current + 1) % tabs.length;
+    else if (e.key === 'ArrowLeft') next = (current - 1 + tabs.length) % tabs.length;
+
+    if (next >= 0) {
+      e.preventDefault();
+      tabs[next].focus();
+      tabs[next].click();
     }
   });
 }

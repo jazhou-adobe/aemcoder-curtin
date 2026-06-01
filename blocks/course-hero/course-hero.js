@@ -1,22 +1,24 @@
 export default async function decorate(block) {
-  // The block structure:
-  // Row 1: Tags (Undergraduate, Major)
-  // Row 2: Title (h1)
-  // Row 3: Key info header (h3 + Favourite)
-  // Row 4: Key info items (3 columns)
-
   const rows = [...block.children];
 
-  // Row 3: Add favourite icon styling
-  if (rows[2]) {
-    const favCell = rows[2].querySelector('div:last-child');
-    if (favCell) {
-      favCell.classList.add('course-hero-favourite');
+  // Row 1: Tags + Title
+  if (rows[0]) {
+    const cells = [...rows[0].children];
+    // First cell contains the tags text (e.g. "Undergraduate | Major")
+    if (cells[0]) {
+      const tagText = cells[0].textContent.trim();
+      const tagNames = tagText.split('|').map((t) => t.trim());
+      const tagsContainer = document.createElement('div');
+      tagsContainer.className = 'tags';
+      tagNames.forEach((name, i) => {
+        const span = document.createElement('span');
+        span.className = i === 0 ? 'tag tag--primary' : 'tag tag--secondary';
+        span.textContent = name;
+        tagsContainer.appendChild(span);
+      });
+      cells[0].innerHTML = '';
+      cells[0].appendChild(tagsContainer);
     }
-  }
-
-  // Row 4: Add class for grid layout
-  if (rows[3]) {
-    rows[3].classList.add('course-hero-info-grid');
+    // Second cell contains the h1 - leave as is
   }
 }

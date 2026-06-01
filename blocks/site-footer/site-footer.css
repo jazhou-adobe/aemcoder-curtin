@@ -1,0 +1,102 @@
+.site-footer {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.site-footer h2 {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #444;
+}
+
+.site-footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-footer ul li {
+  margin: 4px 0;
+}
+
+.site-footer a:any-link {
+  color: #b3b3b3;
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+/* Row 1: Campuses and Teaching Areas */
+.site-footer > .footer-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 24px;
+}
+
+.site-footer > .footer-columns > div {
+  min-width: 0;
+}
+
+/* Row 2: Social links */
+.site-footer > .footer-socials {
+  padding: 20px 0;
+  border-top: 1px solid #333;
+}
+
+.site-footer > .footer-socials p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  align-items: center;
+  font-size: 13px;
+}
+
+/* Row 3: Acknowledgment */
+.site-footer > .footer-acknowledgment {
+  padding: 20px 0;
+  border-top: 1px solid #333;
+}
+
+.site-footer > .footer-acknowledgment p {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #999;
+}
+
+/* Row 4: Legal */
+.site-footer > .footer-legal {
+  padding: 20px 0;
+  border-top: 1px solid #333;
+}
+
+.site-footer > .footer-legal ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  margin-bottom: 12px;
+}
+
+.site-footer > .footer-legal p {
+  font-size: 12px;
+  color: #999;
+  margin-top: 8px;
+}
+
+@media (width < 900px) {
+  .site-footer > .footer-columns {
+    grid-template-columns: 1fr;
+  }
+}
