@@ -9,7 +9,7 @@
   margin: 0 !important;
 }
 
-.section:has(.hero-wrapper) > div {
+.section:has(.hero-wrapper) > .hero-wrapper {
   max-width: 100% !important;
   padding: 0 !important;
 }

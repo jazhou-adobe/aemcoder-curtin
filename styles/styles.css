@@ -333,3 +333,12 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
+
+/* Constrain heading/text content even in full-bleed sections */
+main > .section > .default-content-wrapper {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 32px;
+  box-sizing: border-box;
+}
