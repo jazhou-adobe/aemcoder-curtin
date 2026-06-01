@@ -1,3 +1,20 @@
+async function decorateNestedBlocks(panel) {
+  const { loadBlock } = await import('../../scripts/aem.js');
+  const nestedBlocks = [...panel.querySelectorAll('[class]:not([data-block-status])')].filter((el) => {
+    const classes = [...el.classList];
+    return classes.some((c) => c !== 'icon' && !c.startsWith('icon-'));
+  });
+  for (const nested of nestedBlocks) {
+    nested.dataset.blockName = nested.className.split(' ')[0];
+    nested.dataset.blockStatus = 'initialized';
+    try {
+      await loadBlock(nested);
+    } catch (e) {
+      // ignore if block not found
+    }
+  }
+}
+
 export default async function decorate(block) {
   const rows = [...block.children];
   if (rows.length < 2) return;
@@ -46,6 +63,11 @@ export default async function decorate(block) {
   tabPanels.forEach((panel) => {
     panel.setAttribute('role', 'tabpanel');
   });
+
+  // Decorate any nested blocks (e.g. article-cards inside tab content)
+  for (const panel of tabPanels) {
+    await decorateNestedBlocks(panel);
+  }
 
   // Add ARIA role to tab nav
   tabNav.setAttribute('role', 'tablist');
