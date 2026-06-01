@@ -1,0 +1,25 @@
+.footer-social {
+  padding: 0 0 20px;
+}
+
+.footer-social > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+}
+
+.footer-social > div > div {
+  display: contents;
+}
+
+.footer-social a {
+  color: #b3b3b3;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.footer-social a:hover {
+  color: #fff;
+}

@@ -1,27 +1,57 @@
-.cards > ul {
-  list-style: none;
-  margin: 0;
+.cards {
+  --cards-gap: 16px;
+  --cards-text-color: #fff;
+  --cards-card-radius: 24px;
+
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
 }
 
-.cards > ul > li {
-  border: 1px solid #dadada;
-  background-color: var(--background-color);
+.cards > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cards-gap);
 }
 
-.cards .cards-card-body {
-  margin: 16px;
+@media (width >= 900px) {
+  .cards > div {
+    flex-direction: row;
+  }
 }
 
-.cards .cards-card-image {
-  line-height: 0;
+.cards > div > div {
+  position: relative;
+  flex: 1;
+  border-radius: var(--cards-card-radius);
+  overflow: hidden;
+  aspect-ratio: 9 / 16;
 }
 
-.cards > ul > li img {
+.cards > div > div picture {
+  display: block;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  height: 100%;
+}
+
+.cards > div > div picture img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  display: block;
+}
+
+.cards > div > div .cards-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 16px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 0%, transparent 100%);
+  color: var(--cards-text-color);
+  font-size: var(--body-font-size-xs, 14px);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.cards > div > div .cards-caption p {
+  margin: 0;
 }

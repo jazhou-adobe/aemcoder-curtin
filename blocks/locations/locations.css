@@ -1,0 +1,149 @@
+.locations-wrapper {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+.locations {
+  --locations-padding: 40px 0;
+  --locations-gap: 16px;
+  --locations-item-radius: 20px;
+  --locations-content-color: #fff;
+  --locations-content-bg: transparent;
+  --locations-accent: #c3d82e;
+
+  padding: var(--locations-padding);
+  overflow: hidden;
+  position: relative;
+}
+
+.locations .carousel-track {
+  display: flex;
+  gap: var(--locations-gap);
+  transition: transform 0.4s ease;
+  padding: 0 32px;
+}
+
+.locations .carousel-slide {
+  flex: 0 0 calc(25% - 12px);
+  min-width: 240px;
+  position: relative;
+  border-radius: var(--locations-item-radius);
+  overflow: hidden;
+  aspect-ratio: 9 / 16;
+}
+
+.locations .carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.locations .carousel-slide .slide-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 24px;
+  color: var(--locations-content-color);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+}
+
+.locations .carousel-slide .slide-content .location-name {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  font-family: var(--heading-font-family, sans-serif);
+}
+
+.locations .carousel-slide .slide-content .location-link {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--locations-accent);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.locations .carousel-slide .slide-content .location-link::after {
+  content: '\2192';
+  font-size: 14px;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--locations-accent);
+  color: #000;
+  flex-shrink: 0;
+}
+
+.locations .carousel-slide .slide-content .location-link:hover {
+  text-decoration: underline;
+}
+
+.locations .carousel-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  padding: 0 32px;
+}
+
+.locations .carousel-nav .progress-bar {
+  flex: 1;
+  height: 4px;
+  background: #e0e0e0;
+  border-radius: 2px;
+  position: relative;
+  margin-right: 24px;
+}
+
+.locations .carousel-nav .progress-bar .progress-fill {
+  height: 100%;
+  background: #3c1053;
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.locations .carousel-nav .nav-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.locations .carousel-nav .nav-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid #999;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #333;
+}
+
+.locations .carousel-nav .nav-btn:hover {
+  border-color: #051c2a;
+  color: #051c2a;
+}
+
+@media (width < 900px) {
+  .locations .carousel-slide {
+    flex: 0 0 calc(50% - 8px);
+  }
+
+  .locations .carousel-track {
+    padding: 0 16px;
+  }
+}
+
+@media (width < 600px) {
+  .locations .carousel-slide {
+    flex: 0 0 calc(100% - 16px);
+  }
+}
