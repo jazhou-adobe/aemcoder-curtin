@@ -1,2 +1,6 @@
 helix-importer-ui
+scripts/acdl
+scripts/__dropins__
+scripts/commerce-events-collector.js
+scripts/commerce-events-sdk.js
 *.min.js

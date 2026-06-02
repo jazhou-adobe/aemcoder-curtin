@@ -7,7 +7,11 @@
     "lint:js": "eslint .",
     "lint:css": "stylelint \"blocks/**/*.css\" \"styles/*.css\"",
     "lint": "npm run lint:js && npm run lint:css",
-    "lint:fix": "npm run lint:js -- --fix && npm run lint:css -- --fix"
+    "lint:fix": "npm run lint:js -- --fix && npm run lint:css -- --fix",
+    "start": "aem up",
+    "install:dropins": "node build.mjs && node postinstall.js",
+    "postinstall": "npm run install:dropins",
+    "postupdate": "npm run install:dropins"
   },
   "repository": {
     "type": "git",
@@ -20,11 +24,24 @@
   },
   "homepage": "https://github.com/adobe/aem-boilerplate#readme",
   "devDependencies": {
+    "@adobe/aem-cli": "^16.5.8",
     "@babel/eslint-parser": "7.29.7",
+    "@dropins/build-tools": "1.0.1",
     "eslint": "8.57.1",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-plugin-import": "2.32.0",
     "stylelint": "17.12.0",
     "stylelint-config-standard": "40.0.0"
+  },
+  "dependencies": {
+    "@adobe/adobe-client-data-layer": "^3.0.1",
+    "@adobe/magento-storefront-event-collector": "^1.15.0",
+    "@adobe/magento-storefront-events-sdk": "^1.15.0",
+    "@dropins/storefront-auth": "~2.1.5",
+    "@dropins/storefront-cart": "~1.5.1",
+    "@dropins/storefront-personalization": "~1.0.1",
+    "@dropins/storefront-recommendations": "~1.1.1",
+    "@dropins/storefront-wishlist": "~2.0.1",
+    "@dropins/tools": "~1.5.3"
   }
 }

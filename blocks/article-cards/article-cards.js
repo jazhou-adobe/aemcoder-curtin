@@ -23,7 +23,7 @@ export default function decorate(block) {
 
     const heading = textCell?.querySelector('h3, h2');
     const link = heading?.querySelector('a') || textCell?.querySelector('a');
-    const para = textCell?.querySelector('p:not(:has(a))') || [...(textCell?.querySelectorAll('p') || [])].find(p => !p.querySelector('a'));
+    const para = textCell?.querySelector('p:not(:has(a))') || [...(textCell?.querySelectorAll('p') || [])].find((p) => !p.querySelector('a'));
 
     if (heading) body.appendChild(heading);
     if (para) body.appendChild(para);
