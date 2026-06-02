@@ -49,11 +49,14 @@
 
 .explore-more > div {
   background: #fff;
+  border: 2px solid #000;
   border-radius: 8px;
-  padding: 24px;
+  padding: 32px 24px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 16px;
+  text-align: center;
   text-decoration: none;
   color: inherit;
   transition: box-shadow 0.2s ease;
@@ -61,35 +64,51 @@
 }
 
 .explore-more > div:hover {
-  box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
+}
+
+.explore-more > div > div:first-child {
+  display: flex;
+  justify-content: center;
 }
 
 .explore-more > div > div:first-child p {
   margin: 0;
 }
 
-.explore-more .icon {
-  width: 40px;
-  height: 40px;
+/* Icon — SVG images loaded via picture/img or .icon span */
+.explore-more > div > div:first-child img {
+  width: 48px;
+  height: 48px;
   display: block;
+  /* Convert black SVG strokes to purple #5525e5 */
+  filter: brightness(0) saturate(100%) invert(24%) sepia(89%) saturate(3000%) hue-rotate(252deg) brightness(85%);
+}
+
+.explore-more .icon {
+  width: 48px;
+  height: 48px;
+  display: block;
+  color: #5525e5;
 }
 
 .explore-more .icon img {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
+  filter: brightness(0) saturate(100%) invert(24%) sepia(89%) saturate(3000%) hue-rotate(252deg) brightness(85%);
 }
 
 .explore-more h3 {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   color: #000;
   margin: 0;
 }
 
 .explore-more p {
-  font-size: 14px;
+  font-size: 15px;
   color: #4b4b4b;
-  margin: 4px 0 0;
+  margin: 0;
   line-height: 1.5;
 }
 
