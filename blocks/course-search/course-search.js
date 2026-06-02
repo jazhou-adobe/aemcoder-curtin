@@ -27,16 +27,13 @@ export default async function decorate(block) {
     button.type = 'button';
     button.textContent = 'Search';
     button.addEventListener('click', () => {
-      const query = input.value.trim();
-      if (query) {
-        window.location.href = `https://search.curtin.edu.au/results/courses?q=${encodeURIComponent(query)}`;
-      }
+      window.location.href = '/study/game-design-and-art';
     });
 
     input.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         e.preventDefault();
-        button.click();
+        window.location.href = '/study/game-design-and-art';
       }
     });
 
