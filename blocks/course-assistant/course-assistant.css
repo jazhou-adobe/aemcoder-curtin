@@ -1,0 +1,374 @@
+/* ============================================================
+   Block Widget
+   ============================================================ */
+
+.course-assistant-widget {
+  padding: 1.5rem;
+  max-width: 640px;
+}
+
+.course-assistant-label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #666;
+  margin: 0 0 0.625rem;
+}
+
+.course-assistant-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.course-assistant-input {
+  flex: 1;
+  padding: 0.75rem 1.125rem;
+  border: 1.5px solid #ddd;
+  border-radius: 2rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #111;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.course-assistant-input:focus {
+  border-color: #5c6bc0;
+  box-shadow: 0 0 0 3px rgb(92 107 192 / 15%);
+}
+
+.course-assistant-btn {
+  padding: 0.75rem 1.5rem;
+  background: #5c6bc0;
+  color: #fff;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.course-assistant-btn:hover,
+.course-assistant-btn:focus-visible {
+  background: #3949ab;
+  outline: none;
+}
+
+@media (width <= 600px) {
+  .course-assistant-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .course-assistant-btn {
+    text-align: center;
+  }
+}
+
+/* ============================================================
+   Modal Overlay
+   ============================================================ */
+
+.course-assistant-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgb(0 0 0 / 55%);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* ============================================================
+   Modal Panel
+   ============================================================ */
+
+.course-assistant-modal {
+  background: #fff;
+  width: 100%;
+  max-width: 880px;
+  height: 90vh;
+  max-height: 720px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgb(0 0 0 / 28%);
+}
+
+.course-assistant-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.125rem 1.5rem;
+  border-bottom: 1px solid #eee;
+  flex-shrink: 0;
+}
+
+.course-assistant-modal-title {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.course-assistant-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.625rem;
+  line-height: 1;
+  color: #888;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+}
+
+.course-assistant-close-btn:hover,
+.course-assistant-close-btn:focus-visible {
+  color: #111;
+  background: #f0f0f0;
+  outline: none;
+}
+
+/* ============================================================
+   Messages
+   ============================================================ */
+
+.course-assistant-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  scroll-behavior: smooth;
+}
+
+.course-assistant-message {
+  max-width: 72%;
+  line-height: 1.65;
+  font-size: 0.9375rem;
+}
+
+/* User bubble — right aligned, purple gradient */
+.course-assistant-message--user {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #5c6bc0 0%, #7b1fa2 100%);
+  color: #fff;
+  padding: 0.875rem 1.25rem;
+  border-radius: 1.25rem 1.25rem 0.25rem 1.25rem;
+}
+
+/* Assistant — left aligned, plain */
+.course-assistant-message--assistant {
+  align-self: flex-start;
+  color: #222;
+}
+
+.course-assistant-message--assistant p {
+  margin: 0 0 0.75rem;
+}
+
+.course-assistant-message--assistant p:last-child {
+  margin-bottom: 0;
+}
+
+.course-assistant-message--assistant ul {
+  margin: 0.25rem 0 0.75rem;
+  padding-left: 1.25rem;
+}
+
+.course-assistant-message--assistant li {
+  margin-bottom: 0.3rem;
+}
+
+/* Typing indicator */
+.course-assistant-typing {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0.5rem 0;
+  align-self: flex-start;
+}
+
+.course-assistant-typing span {
+  width: 9px;
+  height: 9px;
+  background: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  animation: ca-bounce 1.3s infinite ease-in-out;
+}
+
+.course-assistant-typing span:nth-child(2) {
+  animation-delay: 0.18s;
+}
+
+.course-assistant-typing span:nth-child(3) {
+  animation-delay: 0.36s;
+}
+
+@keyframes ca-bounce {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+
+  30% {
+    transform: translateY(-7px);
+    opacity: 1;
+  }
+}
+
+/* ============================================================
+   YouTube Video Embed
+   ============================================================ */
+
+.course-assistant-video-wrap {
+  margin-top: 0.75rem;
+  border-radius: 10px;
+  overflow: hidden;
+  max-width: 480px;
+  background: #000;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 20%);
+}
+
+.course-assistant-video-thumb {
+  position: relative;
+  cursor: pointer;
+  aspect-ratio: 16 / 9;
+  display: block;
+}
+
+.course-assistant-video-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.2s;
+}
+
+.course-assistant-video-thumb:hover img {
+  opacity: 0.85;
+}
+
+.course-assistant-play-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.course-assistant-iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+  display: block;
+}
+
+/* ============================================================
+   Modal Footer / Chat Input
+   ============================================================ */
+
+.course-assistant-modal-footer {
+  border-top: 1px solid #eee;
+  padding: 1rem 1.5rem;
+  flex-shrink: 0;
+}
+
+/* Gradient border trick */
+.course-assistant-chat-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  border-radius: 2rem;
+  background-image: linear-gradient(#fff, #fff), linear-gradient(135deg, #9c27b0, #e64a19);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  border: 2px solid transparent;
+}
+
+.course-assistant-chat-icon {
+  color: #9c27b0;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.course-assistant-chat-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  background: transparent;
+  color: #222;
+  min-width: 0;
+}
+
+.course-assistant-chat-input::placeholder {
+  color: #aaa;
+}
+
+.course-assistant-send-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #111;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.course-assistant-send-btn:hover,
+.course-assistant-send-btn:focus-visible {
+  background: #444;
+  outline: none;
+}
+
+.course-assistant-disclaimer {
+  text-align: center;
+  font-size: 0.6875rem;
+  color: #aaa;
+  margin: 0.5rem 0 0;
+}
+
+/* ============================================================
+   Responsive — Mobile
+   ============================================================ */
+
+@media (width <= 600px) {
+  .course-assistant-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .course-assistant-modal {
+    height: 95vh;
+    max-height: none;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .course-assistant-message {
+    max-width: 88%;
+  }
+
+  .course-assistant-video-wrap {
+    max-width: 100%;
+  }
+}
