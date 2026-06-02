@@ -1,0 +1,4 @@
+mountpoints:
+  /:
+    url: https://content.da.live/jazhou-adobe/aemcoder-curtin/
+    type: markup
