@@ -1,8 +1,8 @@
 {
   "public": {
     "default": {
-      "commerce-core-endpoint": "https://your-magento-instance.example.com/graphql",
-      "commerce-endpoint": "https://your-catalog-service-endpoint.example.com/graphql",
+      "commerce-core-endpoint": "https://na1-sandbox.api.commerce.adobe.com/PtyNpE675vtkJo73YwDeA7/graphql",
+      "commerce-endpoint": "https://na1-sandbox.api.commerce.adobe.com/PtyNpE675vtkJo73YwDeA7/graphql",
       "headers": {
         "all": {
           "Store": "default"
