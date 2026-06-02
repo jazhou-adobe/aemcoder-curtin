@@ -1,8 +1,8 @@
 {
   "blocks": {
-    "total": 13,
+    "total": 14,
     "offset": 0,
-    "limit": 13,
+    "limit": 14,
     "data": [
       { "name": "Hero", "path": "/tools/sidekick/blocks/hero" },
       { "name": "Cards", "path": "/tools/sidekick/blocks/cards" },
@@ -16,7 +16,8 @@
       { "name": "Course Hero", "path": "/tools/sidekick/blocks/course-hero" },
       { "name": "Course Tabs", "path": "/tools/sidekick/blocks/course-tabs" },
       { "name": "Course Search", "path": "/tools/sidekick/blocks/course-search" },
-      { "name": "Explore More", "path": "/tools/sidekick/blocks/explore-more" }
+      { "name": "Explore More", "path": "/tools/sidekick/blocks/explore-more" },
+      { "name": "Product Recommendations", "path": "/tools/sidekick/blocks/product-recommendations" }
     ],
     ":type": "sheet"
   },
