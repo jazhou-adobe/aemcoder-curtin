@@ -1,0 +1,26 @@
+{
+  "public": {
+    "default": {
+      "commerce-core-endpoint": "https://your-magento-instance.example.com/graphql",
+      "commerce-endpoint": "https://your-catalog-service-endpoint.example.com/graphql",
+      "headers": {
+        "all": {
+          "Store": "default"
+        },
+        "cs": {
+          "Magento-Store-Code": "main_website_store",
+          "Magento-Store-View-Code": "default",
+          "Magento-Website-Code": "base"
+        }
+      },
+      "commerce-assets-enabled": false,
+      "analytics": {
+        "base-currency-code": "USD",
+        "environment": "Production",
+        "store-code": "main_website_store",
+        "store-view-code": "default",
+        "website-code": "base"
+      }
+    }
+  }
+}

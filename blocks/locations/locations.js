@@ -14,7 +14,9 @@ export default async function decorate(block) {
     const linkText = linkEl ? linkEl.textContent.trim() : '';
     const linkHref = linkEl ? linkEl.href : '#';
 
-    slides.push({ img, locationName, linkText, linkHref });
+    slides.push({
+      img, locationName, linkText, linkHref,
+    });
   });
 
   // Clear block and build carousel structure

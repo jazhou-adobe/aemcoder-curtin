@@ -51,7 +51,7 @@ export default async function decorate(block) {
   const gridContainer = document.createElement('div');
   gridContainer.className = 'study-areas-grid';
 
-  for (let i = 3; i < rows.length; i++) {
+  for (let i = 3; i < rows.length; i += 1) {
     const row = rows[i];
     const cells = [...row.children];
     cells.forEach((cell) => {

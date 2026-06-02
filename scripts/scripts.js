@@ -11,6 +11,12 @@ import {
   loadSections,
   loadCSS,
 } from './aem.js';
+import {
+  loadCommerceEager,
+  loadCommerceLazy,
+  initializeCommerce,
+  decorateLinks,
+} from './commerce.js';
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -119,6 +125,7 @@ function decorateButtons(main) {
  */
 // eslint-disable-next-line import/prefer-default-export
 export function decorateMain(main) {
+  decorateLinks(main);
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
@@ -135,7 +142,13 @@ async function loadEager(doc) {
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
+    try {
+      await initializeCommerce();
+    } catch (e) {
+      console.error('Error initializing commerce configuration:', e);
+    }
     decorateMain(main);
+    await loadCommerceEager();
     document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);
   }
@@ -165,6 +178,8 @@ async function loadLazy(doc) {
   if (hash && element) element.scrollIntoView();
 
   loadFooter(doc.querySelector('footer'));
+
+  loadCommerceLazy();
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
