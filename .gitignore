@@ -9,6 +9,9 @@ helix-importer-ui
 *.bak
 .idea
 
+# Migration working files
+.migration/
+
 # Ensure these files are tracked
 !CLAUDE.md
 !AGENTS.md
