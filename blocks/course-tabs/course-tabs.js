@@ -5,18 +5,22 @@ export default async function decorate(block) {
   const tabLabels = [];
   const tabPanels = [];
 
-  rows.forEach((row) => {
-    const cells = [...row.children];
-    const text = row.textContent.trim();
-    // Tab labels: single cell, short text, no block-level children
-    const hasBlockContent = row.querySelector('h1,h2,h3,h4,h5,h6,ul,ol');
-    const hasMultipleP = row.querySelectorAll('p').length > 1;
-    if (cells.length === 1 && text.length < 60 && !hasBlockContent && !hasMultipleP) {
-      tabLabels.push({ label: text, row });
-    } else {
-      tabPanels.push({ row });
-    }
+  // First row: if all cells are short plain text with no block content, it's the tab labels row
+  const firstRow = rows[0];
+  const firstRowCells = firstRow ? [...firstRow.children] : [];
+  const isLabelsRow = firstRowCells.length > 0 && firstRowCells.every((cell) => {
+    const text = cell.textContent.trim();
+    return text.length < 60 && !cell.querySelector('h1,h2,h3,h4,h5,h6,ul,ol,picture,img,a') && cell.querySelectorAll('p').length <= 1;
   });
+
+  if (isLabelsRow) {
+    firstRowCells.forEach((cell) => {
+      tabLabels.push({ label: cell.textContent.trim(), row: firstRow });
+    });
+    rows.slice(1).forEach((row) => tabPanels.push({ row }));
+  } else {
+    rows.forEach((row) => tabPanels.push({ row }));
+  }
 
   // Build tab UI
   const tabContainer = document.createElement('div');
@@ -57,6 +61,10 @@ export default async function decorate(block) {
     const contentFragment = document.createDocumentFragment();
     cells.forEach((cell) => {
       contentFragment.append(...cell.childNodes);
+    });
+    // Remove tab-identifier paragraphs (e.g. "tab-major-overview")
+    [...contentFragment.querySelectorAll('p')].forEach((p) => {
+      if (/^tab-/.test(p.textContent.trim())) p.remove();
     });
 
     // Split content by H2 headings into sections with alternating backgrounds

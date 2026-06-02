@@ -1,26 +1,18 @@
 export default async function decorate(block) {
-  const rows = [...block.children];
-  rows.forEach((row) => {
-    const cells = [...row.children];
-    // cells[0] = icon, cells[1] = title+desc, cells[2] = link
-    const linkCell = cells[2];
-    if (linkCell) {
-      const anchor = linkCell.querySelector('a');
-      if (anchor) {
-        // Make the entire card clickable
-        row.style.cursor = 'pointer';
-        row.addEventListener('click', () => {
-          const href = anchor.getAttribute('href');
-          const target = anchor.getAttribute('target');
-          if (target === '_blank') {
-            window.open(href, '_blank');
-          } else {
-            window.location.href = href;
-          }
-        });
-        row.setAttribute('role', 'link');
-        row.setAttribute('aria-label', anchor.textContent.trim());
-      }
-    }
+  // CSS uses .explore-more as the grid — each child div is a card.
+  // Just make each row clickable using the first link found in any cell.
+  [...block.children].forEach((row) => {
+    const link = row.querySelector('a');
+    if (!link) return;
+    row.style.cursor = 'pointer';
+    row.setAttribute('role', 'link');
+    row.setAttribute('aria-label', link.textContent.trim() || link.getAttribute('aria-label') || '');
+    row.addEventListener('click', (e) => {
+      if (e.target.closest('a')) return; // let native link handle it
+      const href = link.getAttribute('href');
+      const target = link.getAttribute('target');
+      if (target === '_blank') window.open(href, '_blank');
+      else window.location.href = href;
+    });
   });
 }
