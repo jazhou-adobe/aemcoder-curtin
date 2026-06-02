@@ -1,0 +1,25 @@
+{
+  "blocks": {
+    "total": 13,
+    "offset": 0,
+    "limit": 13,
+    "data": [
+      { "name": "Hero", "path": "/tools/sidekick/blocks/hero" },
+      { "name": "Cards", "path": "/tools/sidekick/blocks/cards" },
+      { "name": "Article Cards", "path": "/tools/sidekick/blocks/article-cards" },
+      { "name": "Checkered Items", "path": "/tools/sidekick/blocks/checkered-items" },
+      { "name": "Columns", "path": "/tools/sidekick/blocks/columns" },
+      { "name": "CTA Banner", "path": "/tools/sidekick/blocks/cta-banner" },
+      { "name": "Stats Banner", "path": "/tools/sidekick/blocks/stats-banner" },
+      { "name": "News Events", "path": "/tools/sidekick/blocks/news-events" },
+      { "name": "Locations", "path": "/tools/sidekick/blocks/locations" },
+      { "name": "Course Hero", "path": "/tools/sidekick/blocks/course-hero" },
+      { "name": "Course Tabs", "path": "/tools/sidekick/blocks/course-tabs" },
+      { "name": "Course Search", "path": "/tools/sidekick/blocks/course-search" },
+      { "name": "Explore More", "path": "/tools/sidekick/blocks/explore-more" }
+    ],
+    ":type": "sheet"
+  },
+  ":version": 3,
+  ":names": ["blocks"]
+}
