@@ -1,11 +1,11 @@
 /* header and nav layout */
 header .nav-wrapper {
-  background-color: #000;
+  background-color: #fff;
   width: 100%;
   z-index: 2;
   position: fixed;
-  border-bottom: none;
-  --nav-height: 89px;
+  border-bottom: 1px solid #e0e0e0;
+  --nav-height: 88px;
 }
 
 header nav {
@@ -21,7 +21,7 @@ header nav {
   height: var(--nav-height);
   padding: 0 40px;
   font-family: var(--body-font-family);
-  color: #fff;
+  color: #000;
 }
 
 header nav[aria-expanded='true'] {
@@ -31,7 +31,6 @@ header nav[aria-expanded='true'] {
     'tools tools' var(--nav-height) / auto 1fr;
   overflow-y: auto;
   min-height: 100dvh;
-  background-color: #000;
 }
 
 @media (width >= 900px) {
@@ -39,15 +38,17 @@ header nav[aria-expanded='true'] {
     position: relative;
   }
 
-  header nav,
-  header nav[aria-expanded='true'] {
+  header nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 0 32px;
     max-width: 1400px;
     padding: 0 40px;
-    height: 89px;
+    height: 88px;
+  }
+
+  header nav[aria-expanded='true'] {
     min-height: 0;
     overflow: visible;
   }
@@ -59,7 +60,7 @@ header nav p {
 }
 
 header nav a:any-link {
-  color: #fff;
+  color: currentcolor;
   text-decoration: none;
 }
 
@@ -180,7 +181,7 @@ header nav[aria-expanded='true'] .nav-sections {
 header nav .nav-sections ul {
   list-style: none;
   padding-left: 0;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 header nav .nav-sections ul > li {
@@ -255,14 +256,10 @@ header nav .nav-sections ul > li > ul > li {
     width: 240px;
     top: 150%;
     padding: 16px;
-    background-color: #1a1a1a;
+    background-color: #fff;
     white-space: initial;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul a {
-    color: #fff;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul::before {
@@ -274,7 +271,7 @@ header nav .nav-sections ul > li > ul > li {
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 8px solid #1a1a1a;
+    border-bottom: 8px solid #fff;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
@@ -290,5 +287,4 @@ header nav .nav-tools {
 
 header nav .nav-tools a {
   font-weight: 400;
-  color: #fff;
 }
