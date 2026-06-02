@@ -400,8 +400,11 @@ export async function fetchPlaceholders(path) {
  */
 export async function getConfigFromSession() {
   const configURL = `${window.location.origin}/config.json`;
+  const isLocalhost = window.location.hostname === 'localhost';
 
   try {
+    if (isLocalhost) throw new Error('Skip cache on localhost');
+
     const configJSON = window.sessionStorage.getItem('config');
     if (!configJSON) {
       throw new Error('No config in session storage');
@@ -419,8 +422,10 @@ export async function getConfigFromSession() {
     const config = await fetch(configURL);
     if (!config.ok) throw new Error('Failed to fetch config');
     const configJSON = await config.json();
-    configJSON[':expiry'] = Math.round(Date.now() / 1000) + 7200;
-    window.sessionStorage.setItem('config', JSON.stringify(configJSON));
+    if (!isLocalhost) {
+      configJSON[':expiry'] = Math.round(Date.now() / 1000) + 7200;
+      window.sessionStorage.setItem('config', JSON.stringify(configJSON));
+    }
     return configJSON;
   }
 }

@@ -13,7 +13,8 @@
           "Magento-Website-Code": "base"
         }
       },
-      "commerce-assets-enabled": false,
+      "commerce-assets-enabled": true,
+      "commerce-assets-quality": 80,
       "analytics": {
         "base-currency-code": "USD",
         "environment": "Production",
