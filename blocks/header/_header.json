@@ -1,0 +1,12 @@
+{
+  "definitions": [{
+    "title": "Header",
+    "id": "header",
+    "model": "header"
+  }],
+  "models": [{
+    "id": "header",
+    "fields": []
+  }],
+  "filters": []
+}

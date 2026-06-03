@@ -1,0 +1,12 @@
+{
+  "definitions": [{
+    "title": "Course Tabs",
+    "id": "course-tabs",
+    "model": "course-tabs"
+  }],
+  "models": [{
+    "id": "course-tabs",
+    "fields": []
+  }],
+  "filters": []
+}

@@ -1,0 +1,12 @@
+{
+  "definitions": [{
+    "title": "Footer Legal",
+    "id": "footer-legal",
+    "model": "footer-legal"
+  }],
+  "models": [{
+    "id": "footer-legal",
+    "fields": []
+  }],
+  "filters": []
+}

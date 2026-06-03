@@ -1,0 +1,12 @@
+{
+  "definitions": [{
+    "title": "Course Hero",
+    "id": "course-hero",
+    "model": "course-hero"
+  }],
+  "models": [{
+    "id": "course-hero",
+    "fields": []
+  }],
+  "filters": []
+}

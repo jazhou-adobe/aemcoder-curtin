@@ -1,0 +1,12 @@
+{
+  "definitions": [{
+    "title": "Article Cards",
+    "id": "article-cards",
+    "model": "article-cards"
+  }],
+  "models": [{
+    "id": "article-cards",
+    "fields": []
+  }],
+  "filters": []
+}

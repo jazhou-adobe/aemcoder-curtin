@@ -1,0 +1,12 @@
+{
+  "definitions": [{
+    "title": "Footer",
+    "id": "footer",
+    "model": "footer"
+  }],
+  "models": [{
+    "id": "footer",
+    "fields": []
+  }],
+  "filters": []
+}

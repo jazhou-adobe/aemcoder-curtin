@@ -1,0 +1,12 @@
+{
+  "definitions": [{
+    "title": "Footer Acknowledgement",
+    "id": "footer-acknowledgement",
+    "model": "footer-acknowledgement"
+  }],
+  "models": [{
+    "id": "footer-acknowledgement",
+    "fields": []
+  }],
+  "filters": []
+}

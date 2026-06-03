@@ -1,0 +1,12 @@
+{
+  "definitions": [{
+    "title": "Columns",
+    "id": "columns",
+    "model": "columns"
+  }],
+  "models": [{
+    "id": "columns",
+    "fields": []
+  }],
+  "filters": []
+}

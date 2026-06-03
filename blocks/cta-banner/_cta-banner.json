@@ -1,0 +1,12 @@
+{
+  "definitions": [{
+    "title": "CTA Banner",
+    "id": "cta-banner",
+    "model": "cta-banner"
+  }],
+  "models": [{
+    "id": "cta-banner",
+    "fields": []
+  }],
+  "filters": []
+}

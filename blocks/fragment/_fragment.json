@@ -1,0 +1,18 @@
+{
+  "definitions": [{
+    "title": "Fragment",
+    "id": "fragment",
+    "model": "fragment"
+  }],
+  "models": [{
+    "id": "fragment",
+    "fields": [
+      {
+        "component": "aem-content",
+        "name": "reference",
+        "label": "Reference"
+      }
+    ]
+  }],
+  "filters": []
+}

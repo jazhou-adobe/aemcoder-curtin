@@ -1,0 +1,12 @@
+{
+  "definitions": [{
+    "title": "Hero",
+    "id": "hero",
+    "model": "hero"
+  }],
+  "models": [{
+    "id": "hero",
+    "fields": []
+  }],
+  "filters": []
+}
