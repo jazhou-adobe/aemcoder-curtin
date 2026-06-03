@@ -1,0 +1,4 @@
+[
+  { "...": "./section.json#/filters" },
+  { "...": "./blocks/*.json#/filters" }
+]
