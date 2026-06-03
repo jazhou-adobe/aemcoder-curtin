@@ -1,17 +1,40 @@
-const FEE_RESPONSE_HTML = `
-<p><strong>Animation and Game Design — Fee Structure</strong></p>
-<p><strong>Domestic students (Commonwealth Supported Place):</strong></p>
-<ul>
-  <li>Estimated student contribution: ~$7,950 AUD per year (varies by unit)</li>
-  <li>HECS-HELP available — defer fees until you reach the income repayment threshold</li>
-</ul>
-<p><strong>International students:</strong></p>
-<ul>
-  <li>Indicative annual tuition: ~$37,000 AUD</li>
-  <li>Payment options include upfront or per-semester instalments</li>
-</ul>
-<p>Additional costs may include studio materials, software subscriptions, and field trips. Curtin offers a range of scholarships and bursaries — visit the Curtin Scholarships portal for details.</p>
-`.trim();
+const FEE_PLANS = [
+  {
+    name: 'Specialisation',
+    price: 'A$12,500',
+    period: 'per year',
+    note: 'Full-year specialisation track',
+    featured: false,
+    cta: 'Enrol Now',
+    features: ['2 semesters', '8 units', null, null],
+  },
+  {
+    name: 'Certificate',
+    price: 'A$8,900',
+    period: 'per year',
+    note: '6-month intensive program',
+    featured: false,
+    cta: 'Enrol Now',
+    features: ['1 semester', '4 units', null, '✓'],
+  },
+  {
+    name: 'Existing Students',
+    originalPrice: 'A$12,500',
+    price: 'A$9,375',
+    period: 'per year',
+    note: 'Save 25%. Exclusive returning student offer.',
+    featured: true,
+    cta: 'Enrol Now',
+    features: ['2 semesters', '8 units', '✓', '✓'],
+  },
+];
+
+const FEE_FEATURES = [
+  'Duration',
+  'Units included',
+  'Industry placement',
+  'Graduate certificate pathway',
+];
 
 const SUGGESTIONS = [
   'What are the entry requirements for Animation and Game Design?',
@@ -65,6 +88,62 @@ function addAssistantTextMessage(messagesEl, html) {
   const msg = document.createElement('div');
   msg.className = 'course-assistant-message course-assistant-message--assistant';
   msg.innerHTML = html;
+  messagesEl.append(msg);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function addFeeTableMessage(messagesEl) {
+  const msg = document.createElement('div');
+  msg.className = 'course-assistant-message course-assistant-message--assistant course-assistant-message--wide';
+
+  const intro = document.createElement('p');
+  intro.textContent = 'Here are the enrolment options for Animation and Game Design at Curtin:';
+  msg.append(intro);
+
+  const tableWrap = document.createElement('div');
+  tableWrap.className = 'ca-fee-table-wrap';
+
+  // Header row
+  const header = document.createElement('div');
+  header.className = 'ca-fee-row ca-fee-header';
+  header.innerHTML = '<div class="ca-fee-label"></div>';
+  FEE_PLANS.forEach((plan) => {
+    const col = document.createElement('div');
+    col.className = `ca-fee-col${plan.featured ? ' ca-fee-col--featured' : ''}`;
+    col.innerHTML = `
+      <p class="ca-fee-plan-name">${plan.name}</p>
+      ${plan.originalPrice ? `<p class="ca-fee-original">${plan.originalPrice}</p>` : ''}
+      <p class="ca-fee-price">${plan.price}</p>
+      <p class="ca-fee-period">${plan.period}${plan.note ? `<br><em>${plan.note}</em>` : ''}</p>
+      <a class="ca-fee-enrol-btn" href="/enroll-form">${plan.cta}</a>
+    `;
+    header.append(col);
+  });
+  tableWrap.append(header);
+
+  // Feature rows
+  FEE_FEATURES.forEach((feature, i) => {
+    const row = document.createElement('div');
+    row.className = 'ca-fee-row';
+    const label = document.createElement('div');
+    label.className = 'ca-fee-label';
+    label.textContent = feature;
+    row.append(label);
+
+    FEE_PLANS.forEach((plan) => {
+      const cell = document.createElement('div');
+      cell.className = `ca-fee-col${plan.featured ? ' ca-fee-col--featured' : ''}`;
+      const val = plan.features[i];
+      cell.innerHTML = val === '✓'
+        ? '<span class="ca-fee-check" aria-label="Included">✓</span>'
+        : val || '<span class="ca-fee-dash" aria-label="Not included">—</span>';
+      row.append(cell);
+    });
+
+    tableWrap.append(row);
+  });
+
+  msg.append(tableWrap);
   messagesEl.append(msg);
   messagesEl.scrollTop = messagesEl.scrollHeight;
 }
@@ -210,7 +289,7 @@ function openChatModal(label, initialQuery) {
       });
     } else if (/fee|cost|tuition|price/i.test(text)) {
       simulateTyping(messagesEl, 900, () => {
-        addAssistantTextMessage(messagesEl, FEE_RESPONSE_HTML);
+        addFeeTableMessage(messagesEl);
       });
     } else {
       simulateTyping(messagesEl, 800, () => {
