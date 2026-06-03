@@ -331,10 +331,10 @@ const SPARKLE_ICON = `<svg class="ca-sparkle" width="16" height="16" viewBox="0 
 </svg>`;
 
 const DEFAULT_PROMPTS = [
-  'Which Animation and Game Design courses are available?',
-  'What are the entry requirements for this course?',
-  'What does studying at Curtin look like?',
-  'How much does Animation and Game Design cost?',
+  'How do I enrol at Curtin University?',
+  'What are the on-campus facilities and student life?',
+  'How do I apply for student accommodation on campus?',
+  'What scholarships are available for new students?',
 ];
 
 /**

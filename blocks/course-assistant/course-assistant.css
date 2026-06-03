@@ -3,7 +3,6 @@
    ============================================================ */
 
 .course-assistant-widget {
-  background: #0f0e17;
   padding: 4rem 2rem 3rem;
   text-align: center;
   display: flex;
@@ -16,7 +15,7 @@
   font-size: clamp(2rem, 5vw, 3.25rem);
   font-weight: 900;
   line-height: 1.1;
-  color: #fff;
+  color: #111;
   margin: 0;
   max-width: 700px;
 }
@@ -31,7 +30,8 @@
   background: #fff;
   border-radius: 2rem;
   padding: 0.5rem 0.5rem 0.5rem 1.125rem;
-  box-shadow: 0 0 0 2px rgb(255 255 255 / 15%);
+  border: 1.5px solid #ddd;
+  box-shadow: 0 2px 12px rgb(0 0 0 / 8%);
 }
 
 .course-assistant-search-icon {
@@ -70,10 +70,10 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.5rem 1rem;
-  background: rgb(255 255 255 / 8%);
-  border: 1.5px solid rgb(255 255 255 / 18%);
+  background: #f5f5f5;
+  border: 1.5px solid #e0e0e0;
   border-radius: 2rem;
-  color: #e8e8e8;
+  color: #333;
   font-size: 0.875rem;
   font-family: inherit;
   cursor: pointer;
@@ -83,8 +83,8 @@
 
 .course-assistant-init-prompt-btn:hover,
 .course-assistant-init-prompt-btn:focus-visible {
-  background: rgb(255 255 255 / 14%);
-  border-color: rgb(255 255 255 / 35%);
+  background: #ede7f6;
+  border-color: #9c27b0;
   outline: none;
 }
 
