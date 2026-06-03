@@ -360,12 +360,28 @@
   border-right: none;
 }
 
-/* Featured column — highlighted with orange border */
+/* Featured column — continuous orange border around the whole column */
 .ca-fee-col--featured {
   background: #fff8f0;
-  outline: 2.5px solid #e87722;
-  outline-offset: -2.5px;
-  z-index: 1;
+  border-left: 2px solid #e87722;
+  border-right: 2px solid #e87722;
+}
+
+/* Remove the grey divider between Certificate and featured column */
+.ca-fee-row > :nth-last-child(2) {
+  border-right: none;
+}
+
+/* Top border + rounded corners on the header cell */
+.ca-fee-header .ca-fee-col--featured {
+  border-top: 2px solid #e87722;
+  border-radius: 8px 8px 0 0;
+}
+
+/* Bottom border + rounded corners on the last row cell */
+.ca-fee-row:last-child .ca-fee-col--featured {
+  border-bottom: 2px solid #e87722;
+  border-radius: 0 0 8px 8px;
 }
 
 .ca-fee-plan-name {
