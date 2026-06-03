@@ -1,0 +1,6 @@
+[
+  { "...": "./text.json#/definitions" },
+  { "...": "./image.json#/definitions" },
+  { "...": "./section.json#/definitions" },
+  { "...": "./blocks/*.json#/definitions" }
+]
