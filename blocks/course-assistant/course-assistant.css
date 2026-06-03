@@ -401,7 +401,7 @@
   display: inline-block;
   margin-top: 0.25rem;
   padding: 0.5rem 1.125rem;
-  background: #1473e6;
+  background: #111;
   color: #fff;
   border: none;
   border-radius: 2rem;
@@ -415,16 +415,8 @@
 
 .ca-fee-enrol-btn:hover,
 .ca-fee-enrol-btn:focus-visible {
-  background: #0d66d0;
+  background: #444;
   outline: none;
-}
-
-.ca-fee-col--featured .ca-fee-enrol-btn {
-  background: #e87722;
-}
-
-.ca-fee-col--featured .ca-fee-enrol-btn:hover {
-  background: #c96318;
 }
 
 .ca-fee-check {
