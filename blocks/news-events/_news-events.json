@@ -1,0 +1,12 @@
+{
+  "definitions": [{
+    "title": "News Events",
+    "id": "news-events",
+    "model": "news-events"
+  }],
+  "models": [{
+    "id": "news-events",
+    "fields": []
+  }],
+  "filters": []
+}

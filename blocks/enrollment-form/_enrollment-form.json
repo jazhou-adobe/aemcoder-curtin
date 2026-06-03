@@ -1,0 +1,12 @@
+{
+  "definitions": [{
+    "title": "Enrollment Form",
+    "id": "enrollment-form",
+    "model": "enrollment-form"
+  }],
+  "models": [{
+    "id": "enrollment-form",
+    "fields": []
+  }],
+  "filters": []
+}

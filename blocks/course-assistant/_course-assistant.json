@@ -1,0 +1,12 @@
+{
+  "definitions": [{
+    "title": "Course Assistant",
+    "id": "course-assistant",
+    "model": "course-assistant"
+  }],
+  "models": [{
+    "id": "course-assistant",
+    "fields": []
+  }],
+  "filters": []
+}

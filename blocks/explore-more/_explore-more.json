@@ -1,0 +1,12 @@
+{
+  "definitions": [{
+    "title": "Explore More",
+    "id": "explore-more",
+    "model": "explore-more"
+  }],
+  "models": [{
+    "id": "explore-more",
+    "fields": []
+  }],
+  "filters": []
+}

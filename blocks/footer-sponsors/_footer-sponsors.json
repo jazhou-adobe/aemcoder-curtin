@@ -1,0 +1,12 @@
+{
+  "definitions": [{
+    "title": "Footer Sponsors",
+    "id": "footer-sponsors",
+    "model": "footer-sponsors"
+  }],
+  "models": [{
+    "id": "footer-sponsors",
+    "fields": []
+  }],
+  "filters": []
+}

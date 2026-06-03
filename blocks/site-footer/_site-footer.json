@@ -1,0 +1,12 @@
+{
+  "definitions": [{
+    "title": "Site Footer",
+    "id": "site-footer",
+    "model": "site-footer"
+  }],
+  "models": [{
+    "id": "site-footer",
+    "fields": []
+  }],
+  "filters": []
+}

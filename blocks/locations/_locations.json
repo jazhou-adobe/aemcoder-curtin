@@ -1,0 +1,12 @@
+{
+  "definitions": [{
+    "title": "Locations",
+    "id": "locations",
+    "model": "locations"
+  }],
+  "models": [{
+    "id": "locations",
+    "fields": []
+  }],
+  "filters": []
+}

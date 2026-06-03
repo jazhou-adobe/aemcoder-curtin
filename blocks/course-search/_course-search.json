@@ -1,0 +1,12 @@
+{
+  "definitions": [{
+    "title": "Course Search",
+    "id": "course-search",
+    "model": "course-search"
+  }],
+  "models": [{
+    "id": "course-search",
+    "fields": []
+  }],
+  "filters": []
+}

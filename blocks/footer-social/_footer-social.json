@@ -1,0 +1,12 @@
+{
+  "definitions": [{
+    "title": "Footer Social",
+    "id": "footer-social",
+    "model": "footer-social"
+  }],
+  "models": [{
+    "id": "footer-social",
+    "fields": []
+  }],
+  "filters": []
+}

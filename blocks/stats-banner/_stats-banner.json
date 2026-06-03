@@ -1,0 +1,12 @@
+{
+  "definitions": [{
+    "title": "Stats Banner",
+    "id": "stats-banner",
+    "model": "stats-banner"
+  }],
+  "models": [{
+    "id": "stats-banner",
+    "fields": []
+  }],
+  "filters": []
+}

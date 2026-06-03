@@ -1,0 +1,12 @@
+{
+  "definitions": [{
+    "title": "Footer Links",
+    "id": "footer-links",
+    "model": "footer-links"
+  }],
+  "models": [{
+    "id": "footer-links",
+    "fields": []
+  }],
+  "filters": []
+}

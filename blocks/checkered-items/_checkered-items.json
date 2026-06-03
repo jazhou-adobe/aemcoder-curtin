@@ -1,0 +1,12 @@
+{
+  "definitions": [{
+    "title": "Checkered Items",
+    "id": "checkered-items",
+    "model": "checkered-items"
+  }],
+  "models": [{
+    "id": "checkered-items",
+    "fields": []
+  }],
+  "filters": []
+}
