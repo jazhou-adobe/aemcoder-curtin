@@ -320,40 +320,86 @@ function openChatModal(label, initialQuery) {
 
 }
 
+const SPARKLE_ICON = `<svg class="ca-sparkle" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+  <path d="M8 1 L9 6.5 L14.5 8 L9 9.5 L8 15 L6.5 9.5 L1 8 L6.5 6.5 Z" fill="url(#ca-sparkle-grad)"/>
+  <defs>
+    <linearGradient id="ca-sparkle-grad" x1="0" y1="0" x2="16" y2="16" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#c084fc"/>
+      <stop offset="100%" stop-color="#f472b6"/>
+    </linearGradient>
+  </defs>
+</svg>`;
+
+const DEFAULT_PROMPTS = [
+  'Which Animation and Game Design courses are available?',
+  'What are the entry requirements for this course?',
+  'What does studying at Curtin look like?',
+  'How much does Animation and Game Design cost?',
+];
+
 /**
  * loads and decorates the block
  * @param {Element} block The block element
  */
 export default function decorate(block) {
-  const labelEl = block.querySelector('div > div');
-  const label = labelEl?.textContent?.trim() || 'Ask Assistant';
+  const rows = [...block.querySelectorAll(':scope > div')];
+  const title = rows[0]?.querySelector('div')?.textContent?.trim()
+    || 'Find your perfect course at Curtin.';
+  const authoredPrompts = rows.slice(1).map((r) => r.querySelector('div')?.textContent?.trim()).filter(Boolean);
+  const prompts = authoredPrompts.length ? authoredPrompts : DEFAULT_PROMPTS;
+  const modalLabel = 'Ask Assistant';
+
   block.innerHTML = '';
 
   const widget = document.createElement('div');
   widget.className = 'course-assistant-widget';
-  widget.innerHTML = `
-    <p class="course-assistant-label">${label}</p>
-    <div class="course-assistant-row">
-      <input
-        type="text"
-        class="course-assistant-input"
-        placeholder="What course are you looking for?"
-        aria-label="Course search query"
-      />
-      <button class="course-assistant-btn" type="button">Chat Now</button>
-    </div>
+
+  const h2 = document.createElement('h2');
+  h2.className = 'course-assistant-title';
+  h2.textContent = title;
+  widget.append(h2);
+
+  const searchWrap = document.createElement('div');
+  searchWrap.className = 'course-assistant-search-wrap';
+  searchWrap.innerHTML = `
+    <span class="course-assistant-search-icon" aria-hidden="true">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+    </span>
+    <input type="text" class="course-assistant-input" placeholder="Ask a question" aria-label="Course search query" />
+    <button class="course-assistant-send-btn" type="button" aria-label="Send">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+      </svg>
+    </button>
   `;
+  widget.append(searchWrap);
+
+  const promptsWrap = document.createElement('div');
+  promptsWrap.className = 'course-assistant-init-prompts';
+  prompts.forEach((text) => {
+    const btn = document.createElement('button');
+    btn.className = 'course-assistant-init-prompt-btn';
+    btn.type = 'button';
+    btn.innerHTML = `${SPARKLE_ICON}<span>${text}</span>`;
+    btn.addEventListener('click', () => openChatModal(modalLabel, text));
+    promptsWrap.append(btn);
+  });
+  widget.append(promptsWrap);
+
   block.append(widget);
 
-  const input = widget.querySelector('.course-assistant-input');
-  const btn = widget.querySelector('.course-assistant-btn');
+  const input = searchWrap.querySelector('.course-assistant-input');
+  const sendBtn = searchWrap.querySelector('.course-assistant-send-btn');
 
-  btn.addEventListener('click', () => {
-    const query = input.value.trim() || 'Tell me about Animation and Game Design courses at Curtin';
-    openChatModal(label, query);
-  });
+  const launch = () => {
+    const query = input.value.trim() || DEFAULT_PROMPTS[0];
+    openChatModal(modalLabel, query);
+  };
 
+  sendBtn.addEventListener('click', launch);
   input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') btn.click();
+    if (e.key === 'Enter') launch();
   });
 }

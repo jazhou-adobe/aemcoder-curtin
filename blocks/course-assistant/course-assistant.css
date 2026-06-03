@@ -1,73 +1,104 @@
 /* ============================================================
-   Block Widget
+   Block Widget — dark hero
    ============================================================ */
 
 .course-assistant-widget {
-  padding: 1.5rem;
-  max-width: 640px;
-}
-
-.course-assistant-label {
-  font-size: 0.8125rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #666;
-  margin: 0 0 0.625rem;
-}
-
-.course-assistant-row {
+  background: #0f0e17;
+  padding: 4rem 2rem 3rem;
+  text-align: center;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.course-assistant-title {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 900;
+  line-height: 1.1;
+  color: #fff;
+  margin: 0;
+  max-width: 700px;
+}
+
+/* Search bar */
+.course-assistant-search-wrap {
+  display: flex;
+  align-items: center;
   gap: 0.5rem;
+  width: 100%;
+  max-width: 640px;
+  background: #fff;
+  border-radius: 2rem;
+  padding: 0.5rem 0.5rem 0.5rem 1.125rem;
+  box-shadow: 0 0 0 2px rgb(255 255 255 / 15%);
+}
+
+.course-assistant-search-icon {
+  color: #9c27b0;
+  flex-shrink: 0;
+  display: flex;
   align-items: center;
 }
 
 .course-assistant-input {
   flex: 1;
-  padding: 0.75rem 1.125rem;
-  border: 1.5px solid #ddd;
-  border-radius: 2rem;
+  border: none;
+  outline: none;
   font-size: 1rem;
   font-family: inherit;
   color: #111;
-  background: #fff;
-  outline: none;
-  transition: border-color 0.2s;
+  background: transparent;
+  min-width: 0;
 }
 
-.course-assistant-input:focus {
-  border-color: #5c6bc0;
-  box-shadow: 0 0 0 3px rgb(92 107 192 / 15%);
+.course-assistant-input::placeholder {
+  color: #aaa;
 }
 
-.course-assistant-btn {
-  padding: 0.75rem 1.5rem;
-  background: #5c6bc0;
-  color: #fff;
-  border: none;
+/* Init prompt chips */
+.course-assistant-init-prompts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.625rem;
+  max-width: 800px;
+}
+
+.course-assistant-init-prompt-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  background: rgb(255 255 255 / 8%);
+  border: 1.5px solid rgb(255 255 255 / 18%);
   border-radius: 2rem;
-  font-size: 1rem;
+  color: #e8e8e8;
+  font-size: 0.875rem;
   font-family: inherit;
-  font-weight: 600;
   cursor: pointer;
-  white-space: nowrap;
-  transition: background 0.2s;
+  transition: background 0.15s, border-color 0.15s;
+  text-align: left;
 }
 
-.course-assistant-btn:hover,
-.course-assistant-btn:focus-visible {
-  background: #3949ab;
+.course-assistant-init-prompt-btn:hover,
+.course-assistant-init-prompt-btn:focus-visible {
+  background: rgb(255 255 255 / 14%);
+  border-color: rgb(255 255 255 / 35%);
   outline: none;
+}
+
+.ca-sparkle {
+  flex-shrink: 0;
 }
 
 @media (width <= 600px) {
-  .course-assistant-row {
-    flex-direction: column;
-    align-items: stretch;
+  .course-assistant-widget {
+    padding: 2.5rem 1.25rem 2rem;
   }
 
-  .course-assistant-btn {
-    text-align: center;
+  .course-assistant-init-prompt-btn {
+    font-size: 0.8125rem;
   }
 }
 
