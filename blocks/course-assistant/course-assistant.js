@@ -1,3 +1,24 @@
+const FEE_RESPONSE_HTML = `
+<p><strong>Animation and Game Design — Fee Structure</strong></p>
+<p><strong>Domestic students (Commonwealth Supported Place):</strong></p>
+<ul>
+  <li>Estimated student contribution: ~$7,950 AUD per year (varies by unit)</li>
+  <li>HECS-HELP available — defer fees until you reach the income repayment threshold</li>
+</ul>
+<p><strong>International students:</strong></p>
+<ul>
+  <li>Indicative annual tuition: ~$37,000 AUD</li>
+  <li>Payment options include upfront or per-semester instalments</li>
+</ul>
+<p>Additional costs may include studio materials, software subscriptions, and field trips. Curtin offers a range of scholarships and bursaries — visit the Curtin Scholarships portal for details.</p>
+`.trim();
+
+const SUGGESTIONS = [
+  'What are the entry requirements for Animation and Game Design?',
+  'What career paths can I pursue after graduating?',
+  'What is the fee structure for this course?',
+];
+
 const COURSE_RESPONSE_HTML = `
 <p>Here are the <strong>Animation and Game Design</strong> courses available at Curtin University:</p>
 <p><strong>Bachelor of Arts (Animation and Game Design)</strong><br>
@@ -48,7 +69,27 @@ function addAssistantTextMessage(messagesEl, html) {
   messagesEl.scrollTop = messagesEl.scrollHeight;
 }
 
-function addAssistantVideoMessage(messagesEl, intro, videoId) {
+function showSuggestions(messagesEl, onSelect) {
+  const wrap = document.createElement('div');
+  wrap.className = 'course-assistant-suggestions';
+
+  SUGGESTIONS.forEach((text) => {
+    const btn = document.createElement('button');
+    btn.className = 'course-assistant-suggestion-btn';
+    btn.type = 'button';
+    btn.innerHTML = `<span aria-hidden="true">↳</span> ${text}`;
+    btn.addEventListener('click', () => {
+      wrap.remove();
+      onSelect(text);
+    });
+    wrap.append(btn);
+  });
+
+  messagesEl.append(wrap);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function addAssistantVideoMessage(messagesEl, intro, videoId, onSuggest) {
   const msg = document.createElement('div');
   msg.className = 'course-assistant-message course-assistant-message--assistant';
 
@@ -68,7 +109,10 @@ function addAssistantVideoMessage(messagesEl, intro, videoId) {
     </div>
   `;
 
+  let played = false;
   const playVideo = () => {
+    if (played) return;
+    played = true;
     const iframe = document.createElement('iframe');
     iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
     iframe.title = 'Course overview video';
@@ -76,6 +120,7 @@ function addAssistantVideoMessage(messagesEl, intro, videoId) {
     iframe.allowFullscreen = true;
     iframe.className = 'course-assistant-iframe';
     thumbWrap.replaceWith(iframe);
+    setTimeout(() => showSuggestions(messagesEl, onSuggest), 600);
   };
 
   thumbWrap.addEventListener('click', playVideo);
@@ -155,22 +200,30 @@ function openChatModal(label, initialQuery) {
     }
   });
 
-  const handleSend = () => {
-    const text = chatInput.value.trim();
-    if (!text) return;
-    chatInput.value = '';
+  const sendMessage = (text) => {
     addUserMessage(messagesEl, text);
 
     if (turn === 1) {
       turn = 2;
       simulateTyping(messagesEl, 1000, () => {
-        addAssistantVideoMessage(messagesEl, VIDEO_INTRO, VIDEO_ID);
+        addAssistantVideoMessage(messagesEl, VIDEO_INTRO, VIDEO_ID, sendMessage);
+      });
+    } else if (/fee|cost|tuition|price/i.test(text)) {
+      simulateTyping(messagesEl, 900, () => {
+        addAssistantTextMessage(messagesEl, FEE_RESPONSE_HTML);
       });
     } else {
       simulateTyping(messagesEl, 800, () => {
         addAssistantTextMessage(messagesEl, '<p>I\'m here to help you explore more about Curtin University courses. Feel free to ask anything about Animation, Game Design, or other programs!</p>');
       });
     }
+  };
+
+  const handleSend = () => {
+    const text = chatInput.value.trim();
+    if (!text) return;
+    chatInput.value = '';
+    sendMessage(text);
   };
 
   sendBtn.addEventListener('click', handleSend);
@@ -185,6 +238,7 @@ function openChatModal(label, initialQuery) {
     turn = 1;
     chatInput.focus();
   });
+
 }
 
 /**

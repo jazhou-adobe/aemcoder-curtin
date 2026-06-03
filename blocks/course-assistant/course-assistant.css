@@ -276,6 +276,46 @@
 }
 
 /* ============================================================
+   Prompt Suggestions
+   ============================================================ */
+
+.course-assistant-suggestions {
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 480px;
+}
+
+.course-assistant-suggestion-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  background: #fff;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-family: inherit;
+  color: #333;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.course-assistant-suggestion-btn:hover,
+.course-assistant-suggestion-btn:focus-visible {
+  border-color: #9c27b0;
+  background: #faf5ff;
+  outline: none;
+}
+
+.course-assistant-suggestion-btn span {
+  color: #999;
+  flex-shrink: 0;
+}
+
+/* ============================================================
    Modal Footer / Chat Input
    ============================================================ */
 
