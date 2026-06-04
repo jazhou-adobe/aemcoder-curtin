@@ -11,6 +11,10 @@ export default async function decorate(block) {
   if (searchRow) {
     const placeholderText = searchRow.textContent.trim();
     searchRow.innerHTML = '';
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'search-wrapper';
+
     const container = document.createElement('div');
     container.className = 'search-bar-container';
 
@@ -22,6 +26,7 @@ export default async function decorate(block) {
     input.type = 'search';
     input.placeholder = placeholderText;
     input.setAttribute('aria-label', 'Search courses');
+    input.setAttribute('autocomplete', 'off');
 
     const button = document.createElement('button');
     button.type = 'button';
@@ -38,7 +43,50 @@ export default async function decorate(block) {
     });
 
     container.append(iconWrap, input, button);
-    searchRow.append(container);
+
+    // Autocomplete dropdown
+    const suggestions = [
+      { label: 'game design degree', category: 'Courses', href: '/study/game-design-and-art' },
+      { label: 'Game Design and Development', category: 'Courses', href: '/study/game-design-and-art' },
+      { label: 'Anima & Game Arch Dsgn Spec', category: 'Courses', href: '/study/game-design-and-art' },
+    ];
+
+    const dropdown = document.createElement('ul');
+    dropdown.className = 'search-suggestions';
+    dropdown.setAttribute('role', 'listbox');
+    dropdown.hidden = true;
+
+    const updateSuggestions = (query) => {
+      const q = query.trim().toLowerCase();
+      dropdown.innerHTML = '';
+      if (!q) { dropdown.hidden = true; return; }
+
+      const matches = suggestions.filter((s) => s.label.toLowerCase().includes(q));
+      if (!matches.length) { dropdown.hidden = true; return; }
+
+      matches.forEach((s) => {
+        const li = document.createElement('li');
+        li.setAttribute('role', 'option');
+        li.innerHTML = `
+          <span class="suggestion-icon"><img src="/icons/magnify-thick.svg" alt="" loading="lazy"></span>
+          <span class="suggestion-label">${s.label}</span>
+          <span class="suggestion-category">${s.category}</span>
+        `;
+        li.addEventListener('mousedown', (e) => {
+          e.preventDefault();
+          window.location.href = s.href;
+        });
+        dropdown.append(li);
+      });
+      dropdown.hidden = false;
+    };
+
+    input.addEventListener('input', () => updateSuggestions(input.value));
+    input.addEventListener('focus', () => updateSuggestions(input.value));
+    input.addEventListener('blur', () => { dropdown.hidden = true; });
+
+    wrapper.append(container, dropdown);
+    searchRow.append(wrapper);
   }
 
   // Transform Row 2 into study areas heading

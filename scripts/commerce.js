@@ -22,6 +22,25 @@ export const CORE_FETCH_GRAPHQL = new FetchGraphQL();
 export const CS_FETCH_GRAPHQL = new FetchGraphQL();
 
 /**
+ * Commerce route path constants
+ */
+export const CUSTOMER_LOGIN_PATH = '/customer/login';
+export const CUSTOMER_ORDER_DETAILS_PATH = '/customer/order-details';
+export const CUSTOMER_RETURN_DETAILS_PATH = '/customer/return-details';
+export const CUSTOMER_RETURNS_PATH = '/customer/returns';
+export const ORDER_DETAILS_PATH = '/order-details';
+export const UPS_TRACKING_URL = 'https://www.ups.com/track';
+export const CUSTOMER_ORDERS_PATH = '/customer/orders';
+export const RETURN_DETAILS_PATH = '/return-details';
+export const CREATE_RETURN_PATH = '/create-return';
+export const CUSTOMER_CREATE_RETURN_PATH = '/customer/create-return';
+export const CUSTOMER_ACCOUNT_PATH = '/customer/account';
+export const CUSTOMER_FORGOTPASSWORD_PATH = '/customer/forgot-password';
+export const CUSTOMER_ADDRESS_PATH = '/customer/address';
+export const SUPPORT_PATH = '/support';
+export function authPrivacyPolicyConsentSlot() { return null; }
+
+/**
  * Preloads a file with specified attributes
  * @param {string} href - The URL to preload
  * @param {string} as - The type of resource being preloaded

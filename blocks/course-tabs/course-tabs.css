@@ -109,8 +109,51 @@
   text-decoration: underline;
 }
 
+.course-tabs .course-tabs__panel ul li a {
+  font-weight: 700;
+  color: #000;
+}
+
+.course-tabs .course-tabs__panel a.button.primary {
+  color: var(--background-color, #fff);
+  text-decoration: none;
+  background-color: var(--text-color, #1a1a1a);
+  border-color: var(--text-color, #1a1a1a);
+}
+
 .course-tabs .course-tabs__panel a:hover {
   color: var(--link-hover-color, #000);
+}
+
+.course-tabs .course-tabs__panel a.button.primary:hover {
+  background-color: var(--dark-color, #000);
+  border-color: var(--dark-color, #000);
+  color: var(--background-color, #fff);
+}
+
+/* Card: white rounded box containing H3 + list */
+.course-tabs .course-tabs__card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 40px 48px;
+  margin-top: 40px;
+}
+
+.course-tabs .course-tabs__card h3 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+@media (width < 900px) {
+  .course-tabs .course-tabs__card {
+    padding: 24px;
+  }
+
+  .course-tabs .course-tabs__card h3 {
+    font-size: 24px;
+  }
 }
 
 /* Value props section - centered heading with 3-col layout for h3+p pairs */
