@@ -35,6 +35,20 @@ export default async function decorate(block) {
     }
   }
 
+  // Row 6 (Apply now): style as button and move to after title (row 1)
+  const applyRow = rows[6];
+  if (applyRow) {
+    const applyLink = applyRow.querySelector('a');
+    if (applyLink && rows[1]) {
+      applyLink.removeAttribute('class');
+      const actionsDiv = document.createElement('div');
+      actionsDiv.className = 'course-hero-actions';
+      actionsDiv.appendChild(applyLink);
+      rows[1].after(actionsDiv);
+    }
+    applyRow.remove();
+  }
+
   // Row 2 (index 2): Key info header — build header with Favourite button on the right
   if (rows[2]) {
     const cells = [...rows[2].children];
@@ -59,7 +73,23 @@ export default async function decorate(block) {
 
     headerDiv.appendChild(titleDiv);
     headerDiv.appendChild(favDiv);
+    rows[2].className = 'key-info-card-header';
     rows[2].innerHTML = '';
     rows[2].appendChild(headerDiv);
+  }
+
+  // Rows 3–5: Key info item rows — merge all cells into a single container
+  const itemRows = [rows[3], rows[4], rows[5]].filter(Boolean);
+  if (itemRows.length && rows[2]) {
+    const itemsContainer = document.createElement('div');
+    itemsContainer.className = 'key-info-items';
+    itemRows.forEach((row) => {
+      [...row.children].forEach((cell) => {
+        cell.className = 'key-info-item';
+        itemsContainer.appendChild(cell);
+      });
+      row.remove();
+    });
+    rows[2].after(itemsContainer);
   }
 }
