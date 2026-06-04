@@ -113,6 +113,29 @@ export default async function decorate(block) {
         inner.appendChild(grid);
       }
 
+      // Wrap H3 + following list in a card
+      if (!sectionDiv.classList.contains('course-tabs__section--value-props')) {
+        [...inner.querySelectorAll('h3')].forEach((h3) => {
+          const nextEl = h3.nextElementSibling;
+          if (nextEl && (nextEl.tagName === 'UL' || nextEl.tagName === 'OL')) {
+            const card = document.createElement('div');
+            card.className = 'course-tabs__card';
+            h3.parentNode.insertBefore(card, h3);
+            card.appendChild(h3);
+            card.appendChild(nextEl);
+          }
+        });
+      }
+
+      // Convert standalone paragraph links to primary buttons
+      [...inner.querySelectorAll('p')].forEach((p) => {
+        const links = [...p.querySelectorAll('a')];
+        if (links.length === 1 && p.textContent.trim() === links[0].textContent.trim()) {
+          p.className = 'button-wrapper';
+          links[0].classList.add('button', 'primary');
+        }
+      });
+
       sectionDiv.appendChild(inner);
       panelDiv.appendChild(sectionDiv);
     });
