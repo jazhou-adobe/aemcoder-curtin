@@ -317,7 +317,6 @@ function openChatModal(label, initialQuery) {
     turn = 1;
     chatInput.focus();
   });
-
 }
 
 const SPARKLE_ICON = `<svg class="ca-sparkle" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
