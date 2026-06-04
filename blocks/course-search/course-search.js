@@ -56,7 +56,7 @@ export default async function decorate(block) {
     dropdown.setAttribute('role', 'listbox');
     dropdown.hidden = true;
 
-    function updateSuggestions(query) {
+    const updateSuggestions = (query) => {
       const q = query.trim().toLowerCase();
       dropdown.innerHTML = '';
       if (!q) { dropdown.hidden = true; return; }
@@ -79,7 +79,7 @@ export default async function decorate(block) {
         dropdown.append(li);
       });
       dropdown.hidden = false;
-    }
+    };
 
     input.addEventListener('input', () => updateSuggestions(input.value));
     input.addEventListener('focus', () => updateSuggestions(input.value));

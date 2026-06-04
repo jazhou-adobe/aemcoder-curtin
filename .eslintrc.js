@@ -15,6 +15,7 @@ module.exports = {
     'import/prefer-default-export': 'off', // allow named exports for single exports
     'import/no-cycle': 'off', // allow circular dependencies for browser code
     'import/no-relative-packages': 'off', // allow relative imports for browser code
+    'import/no-unresolved': ['error', { ignore: ['^@dropins/', 'scripts/initializers/', '../modal/modal\\.js', 'scripts/components/'] }], // @dropins and some blocks are runtime deps not available at lint time
     'linebreak-style': ['error', 'unix'], // enforce unix linebreaks
     'no-param-reassign': [2, { props: false }], // allow modifying properties of param
     'no-use-before-define': [2, { functions: false }],
