@@ -129,9 +129,48 @@ function setupUEEventHandlers() {
 }
 
 /**
+ * Sets data-aue-model="section" on section elements so UE can load their
+ * property panel. Sections are plain divs that get .section added client-side
+ * by decorateSections(), so we watch for the class attribute change.
+ */
+function setupSectionInstrumentation() {
+  const main = document.querySelector('main');
+  if (!main) return;
+
+  const applyModel = (el) => {
+    if (el.classList.contains('section') && !el.hasAttribute('data-aue-model')) {
+      el.setAttribute('data-aue-model', 'section');
+    }
+  };
+
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'attributes' && mutation.target.parentElement === main) {
+        applyModel(mutation.target);
+      } else if (mutation.type === 'childList') {
+        mutation.addedNodes.forEach((node) => {
+          if (node.nodeType === Node.ELEMENT_NODE) applyModel(node);
+        });
+      }
+    });
+  });
+
+  observer.observe(main, {
+    childList: true,
+    attributes: true,
+    attributeFilter: ['class'],
+    subtree: false,
+  });
+
+  // Instrument any sections already present in the DOM
+  main.querySelectorAll(':scope > .section').forEach(applyModel);
+}
+
+/**
  * Initializes UE instrumentation.
  */
 export default function init() {
   setupObservers();
   setupUEEventHandlers();
+  setupSectionInstrumentation();
 }
