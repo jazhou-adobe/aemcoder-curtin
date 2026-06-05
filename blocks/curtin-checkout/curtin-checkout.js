@@ -17,7 +17,7 @@ export default function decorate(block) {
   // Row 11: total amount
   // Row 12: complete purchase button label
 
-  const productImage = getText(0) || '';
+  const productImage = 'https://main--aemcoder-curtin--jazhou-adobe.aem.page/products/curtin-hoodie-blue/media_123d05508ecf048f00143b510b7c05d0cc12eae9b.png?width=750&format=png&optimize=medium';
   const productName = getText(1) || 'Curtin University Heritage Hoodie';
   const variantParts = getText(2).split('|').map((s) => s.trim());
   const productSize = variantParts[0] || 'M';
@@ -65,7 +65,7 @@ export default function decorate(block) {
           <h2 class="curtin-checkout__section-title">Contact Information</h2>
           <div class="curtin-checkout__field-group">
             <label class="curtin-checkout__label" for="cc-email">Email Address</label>
-            <input class="curtin-checkout__input" id="cc-email" type="email" value="${email}" autocomplete="email" />
+            <input class="curtin-checkout__input" id="cc-email" type="email" autocomplete="email" />
           </div>
         </section>
 
@@ -75,25 +75,25 @@ export default function decorate(block) {
           <div class="curtin-checkout__row">
             <div class="curtin-checkout__field-group">
               <label class="curtin-checkout__label" for="cc-first-name">First Name</label>
-              <input class="curtin-checkout__input" id="cc-first-name" type="text" value="${firstName}" autocomplete="given-name" />
+              <input class="curtin-checkout__input" id="cc-first-name" type="text" autocomplete="given-name" />
             </div>
             <div class="curtin-checkout__field-group">
               <label class="curtin-checkout__label" for="cc-last-name">Last Name</label>
-              <input class="curtin-checkout__input" id="cc-last-name" type="text" value="${lastName}" autocomplete="family-name" />
+              <input class="curtin-checkout__input" id="cc-last-name" type="text" autocomplete="family-name" />
             </div>
           </div>
           <div class="curtin-checkout__field-group">
             <label class="curtin-checkout__label" for="cc-address">Address</label>
-            <input class="curtin-checkout__input" id="cc-address" type="text" value="${address}" autocomplete="street-address" />
+            <input class="curtin-checkout__input" id="cc-address" type="text" autocomplete="street-address" />
           </div>
           <div class="curtin-checkout__row">
             <div class="curtin-checkout__field-group">
               <label class="curtin-checkout__label" for="cc-city">City</label>
-              <input class="curtin-checkout__input" id="cc-city" type="text" value="${city}" autocomplete="address-level2" />
+              <input class="curtin-checkout__input" id="cc-city" type="text" autocomplete="address-level2" />
             </div>
             <div class="curtin-checkout__field-group">
               <label class="curtin-checkout__label" for="cc-postcode">Postcode</label>
-              <input class="curtin-checkout__input" id="cc-postcode" type="text" value="${postcode}" autocomplete="postal-code" />
+              <input class="curtin-checkout__input" id="cc-postcode" type="text" autocomplete="postal-code" />
             </div>
           </div>
         </section>
@@ -103,13 +103,14 @@ export default function decorate(block) {
           <h2 class="curtin-checkout__section-title">Payment Method</h2>
           <div class="curtin-checkout__payment-options">
             <button class="curtin-checkout__pay-btn" type="button" aria-label="Google Pay">
-              <span class="curtin-checkout__pay-logo curtin-checkout__pay-logo--google">GOOGLE<br><small>GOOGLE PAY</small></span>
+              <span class="curtin-checkout__pay-icon">
+                <img src="https://www.svgrepo.com/show/452222/google-pay.svg" alt="Google Pay" width="48" height="32" />
+              </span>
             </button>
             <button class="curtin-checkout__pay-btn" type="button" aria-label="Alipay">
               <span class="curtin-checkout__pay-icon">
-                <svg width="28" height="24" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="28" height="24" rx="2" fill="#1677FF"/><path d="M7 12c0-2.76 2.24-5 5-5s5 2.24 5 5-2.24 5-5 5-5-2.24-5-5z" fill="#fff"/><path d="M17.5 17c2-1 5.5.5 5.5.5s-1.5-3-3.5-4" stroke="#fff" stroke-width="1.2" fill="none"/></svg>
+                <img src="https://cdn.worldvectorlogo.com/logos/alipay-square-.svg" alt="Alipay" width="40" height="40" style="max-width:40px;max-height:40px;object-fit:contain;" />
               </span>
-              <span class="curtin-checkout__pay-label">ALIPAY</span>
             </button>
             <button class="curtin-checkout__pay-btn" type="button" aria-label="WePay">
               <span class="curtin-checkout__pay-icon">
@@ -119,9 +120,8 @@ export default function decorate(block) {
             </button>
             <button class="curtin-checkout__pay-btn" type="button" aria-label="Apple Pay">
               <span class="curtin-checkout__pay-icon">
-                <svg width="28" height="24" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="28" height="24" rx="2" fill="#000"/><path d="M14 5c.8-1 2-1.5 3-1.4-.1 1.1-.6 2.2-1.4 2.9-.8.8-1.9 1.3-3 1.2.1-1 .6-2 1.4-2.7zM17.2 8c1.7 0 3.3 1 4 2.5-3.5 1.9-2.9 6.9.8 8.2-.5 1.2-1.1 2.4-2.2 3.3-.8.6-1.6.6-2.3.2-.7-.5-1.4-.5-2.1 0-.8.4-1.6.4-2.3-.2-1.7-1.4-3-4-3-6.8 0-3.3 2.2-5.2 4.4-5.2.8 0 1.7.4 2.7 1z" fill="#fff"/></svg>
+                <img src="https://www.logo.wine/a/logo/Apple_Pay/Apple_Pay-Logo.wine.svg" alt="Apple Pay" width="48" height="32" />
               </span>
-              <span class="curtin-checkout__pay-label">APPLE PAY</span>
             </button>
           </div>
 

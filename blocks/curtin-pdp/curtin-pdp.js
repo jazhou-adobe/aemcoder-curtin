@@ -177,10 +177,11 @@ export default function decorate(block) {
   qtyRow.appendChild(qtyControls);
   info.appendChild(qtyRow);
 
-  // Add to bag
+  // Express checkout
   const addBtn2 = document.createElement('button');
   addBtn2.className = 'curtin-pdp__add-to-bag';
-  addBtn2.textContent = 'Add to Bag';
+  addBtn2.textContent = 'Express Checkout';
+  addBtn2.addEventListener('click', () => { window.location.href = '/curtin-checkout'; });
   info.appendChild(addBtn2);
 
   // Wishlist
