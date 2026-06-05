@@ -96,6 +96,7 @@ export default function decorate(block) {
               <input class="curtin-checkout__input" id="cc-postcode" type="text" autocomplete="postal-code" />
             </div>
           </div>
+          <button class="curtin-checkout__campus-btn" type="button">Campus Collection</button>
         </section>
 
         <!-- Payment Method -->
